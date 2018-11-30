@@ -1,0 +1,30 @@
+﻿def create():
+          nome=input('Digite um nome a ser adicionado:')
+          nomes.append(nome)
+          print('Nome adicionado!')
+def menu():
+          print('''Bem vindo ao menu! =)
+          Apresentarei as funções do nosso menu, e após 
+          isso digite o nº da opção desejada.
+          0 - Sair --> Fecha o programa
+          1 - create --> Criação de dados. 
+          2 - read --> Consultar dados.
+          3 - update --> Modificar dados.
+          4 - delete --> Destruir dados.
+          ''')
+          
+          opção=input('Digite a opção desejada:\n')
+
+          if opção=='1':
+                    return create()
+          elif opção=='0':
+                    exit()
+def boas_vindas(): #Recolhe o nome do usuário e dá boas vindas para ele
+          nome=input('Digite o seu nome:\n')
+          print('\nSaudações, {}.'.format(nome))
+          acesso=input('\nVocê deseja acessar o menu de opções?\n("sim" para acessar)"\n')
+
+          if acesso.lower()=='sim':
+            return menu()
+nomes=[]
+boas_vindas()
