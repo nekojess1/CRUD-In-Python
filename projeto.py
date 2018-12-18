@@ -22,7 +22,7 @@ def back_menu():
         back_menu()        
 
 def wrong():                              
-    print('Opção inválida!\nDigite uma opção dentro do campo escolhido. Exemplo:2.2') 
+    print('Opção inválida!\nDigite uma opção dentro do campo escolhido.') 
     return back_menu()                    
 
 
@@ -151,19 +151,34 @@ def create_disciplinas():
 # ---------------------------------R E A D -----------------------------------#
 
 def read_aluno():
-    print("""0 - Ler todos os professores
-     1 - Buscar professores 
-     2 - Voltar""")
+    print("""Menu de opções
+
+     0 - Ler todos os alunos
+     1 - Buscar alunos
+     2 - Voltar
+
+     """)
+
     opção=input('Digite a opção desejada:')
-    if opção == 0:
+    if opção == '0':
         print('-'*45)
-        print ('Professor            CPF         Departamento')
+        print ('Aluno              CPF')
         print('-'*45)
-        for i in professores:
+        for i in alunos:
             nome=i[0]
             cpf=i[1]
-            departamento=i[2]
-            print ('{}           {}             {}'.format(nome,cpf,departamento))
+            print ('{}           {}'.format(nome,cpf))
+    elif opção == '2':
+        menu()
+    elif opção == '1':
+        nome=input('Digite um nome a ser procurado:\n')
+        for i in alunos:
+            if i[0]==nome:
+                print('Nome: {}     CPF: {}'.format(i[0],i[1]))
+        return back_menu()
+    else:
+        return wrong()
+
 
 def read_professor():
     print("""Menu de opções
@@ -173,6 +188,7 @@ def read_professor():
      2 - Voltar
      
      """)
+
     opção=input('Digite a opção desejada:\n')
     if opção == '0':
         print('-'*45)
@@ -183,11 +199,18 @@ def read_professor():
             cpf=i[1]
             departamento=i[2]
             print ('{}           {}             {}'.format(nome,cpf,departamento))
+        return back_menu()
     elif opção == '2':
         menu()
     elif opção == '1':
-
-            
+        nome=input('Digite um nome a ser procurado:\n')
+        for i in professores:
+            if i[0]==nome:
+                print('Nome: {}     CPF:    {} Departamento: {}'.format(i[0],i[1],i[2]))
+        return back_menu()
+    else:
+        return wrong()
+   
 
 def read_disciplina():
     print("""Menu de opções
@@ -197,35 +220,63 @@ def read_disciplina():
      2 - Voltar
      
      """)
-    opção=input('Digite a opção desejada:')
-    if opção == 0:
+    
+    opção=input('Digite a opção desejada:\n')
+    if opção == '0':
         print('-'*45)
-        print ('Professor            CPF         Departamento')
+        print ('Código          Nome')
         print('-'*45)
-        for i in professores:
-            nome=i[0]
-            cpf=i[1]
-            departamento=i[2]
-            print ('{}           {}             {}'.format(nome,cpf,departamento))
+        for i in disciplinas:
+            code=i[0]
+            nome=i[1]
+            print ('{}           {}'.format(code,nome))
+        return back_menu()
+    elif opção == '2':
+        menu()
+    elif opção == '1':
+        nome=input('Digite um código a ser procurado:\n')
+        for i in disciplinas:
+            if i[0]==nome:
+                print('Código: {}     Nome: {}'.format(i[0],i[1]))
+        return back_menu()
+    else:
+        return wrong()
+
 
 def read_turma():
     print("""Menu de opções
 
-     0 - Ler todos os professores
-     1 - Buscar professores 
+     0 - Ler todas as turmas
+     1 - Buscar turma
      2 - Voltar
 
      """)
-    opção=input('Digite a opção desejada:')
-    if opção == 0:
+
+    opção=input('Digite a opção desejada:\n')
+    if opção == '0':
         print('-'*45)
-        print ('Professor            CPF         Departamento')
+        print ('Código da turma         Período         Código da disciplina         CPF(professor)             CPF(aluno)')
         print('-'*45)
-        for i in professores:
-            nome=i[0]
-            cpf=i[1]
-            departamento=i[2]
-            print ('{}           {}             {}'.format(nome,cpf,departamento))
+        for i in turma:
+           cod_turma=i[0]
+           periodo=i[1]
+           cod_disciplina=i[2]
+           cpf_prof=i[3]
+           cpf_aluno=i[4]
+           print ('{}          {}           {}           {}           {}'.format(cod_turma,periodo,cod_disciplina,cpf_prof,cpf_aluno))
+        return back_menu()
+    elif opção == '2':
+        menu()
+    elif opção == '1':
+        nome=input('Digite um código a ser procurado:\n')
+        for i in turmas:
+            if i[0]==nome:
+                print('Código da turma: {}    Período:{}     Código da disciplina:{}    CPF(professor): {}      CPF(aluno): {}\n'.format(i[0],i[1],i[2],i[3],i[4]))
+        return back_menu()
+    else:
+        return wrong()
+
+
 
 # -------------------------------- M E N U -----------------------------------#
 def menu(): 
@@ -254,6 +305,7 @@ def menu():
              4.4 - Turma
         5 - Generate --> Gerador de listas, atas e etc.
           ''')
+
 
    # OPÇÕES DO MENU
 
@@ -286,7 +338,9 @@ def menu():
 
     elif option=='2.4':
         read_turma()
+
     else:
         return wrong()
+
 boas_vindas()
 
